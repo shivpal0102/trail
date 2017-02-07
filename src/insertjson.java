@@ -8,18 +8,25 @@ import com.shephertz.app42.paas.sdk.java.storage.Query;
 import com.shephertz.app42.paas.sdk.java.storage.QueryBuilder;  
 import com.shephertz.app42.paas.sdk.java.storage.Storage;  
 import com.shephertz.app42.paas.sdk.java.storage.StorageService;  
-import com.shephertz.app42.paas.sdk.java.storage.QueryBuilder.Operator;  
+import com.shephertz.app42.paas.sdk.java.storage.QueryBuilder.Operator;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
 import org.json.*;
 public class insertjson {
-	public static void insertasobj(String un,String pass) {
-		   
+	public static void insertasobj(String dbn,String cn,String un,String pass) throws JSONException {
+		App42API.initialize("24bd78937741b815ab128ed5b0d8179d2d5c7ad30b25787021dabb48329724c6","63d2fd5874facf4957c166b001a9ba29549431f16d3774b20fedca193ee9c20d");
+
          	Nosqlstorage.Authenticate(un,pass);
 	JSONObject json = new JSONObject();  
 	json.put("name","Nick");  
-	json.put("age",30);  
-	App42API.initialize("API_KEY","SECRET_KEY");  
+	json.put("age","30");  
 	StorageService storageService = App42API.buildStorageService();   
-	Storage storage = storageService.insertJSONDocument(dbName,collectionName,json);    
+	Storage storage = storageService.insertJSONDocument(dbn,cn,json);    
 	System.out.println("dbName is " + storage.getDbName());  
 	System.out.println("collection Name is " + storage.getCollectionName());  
 	ArrayList<Storage.JSONDocument> jsonDocList = storage.getJsonDocList();              
@@ -32,8 +39,13 @@ public class insertjson {
 	}   
 	
 	}
-	public static void main(String[] args) {
-		
-		insertasobj(,);
+	public static void main(String[] args) throws IOException, JSONException {
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("enter the database name coll name username pass respectively");
+		String dbn=br.readLine();
+		String cn=br.readLine();
+		String un=br.readLine();
+		String pas=br.readLine();
+		insertasobj(dbn,cn,un,pas);
 	}
 }
