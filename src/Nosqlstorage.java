@@ -73,7 +73,7 @@ public class Nosqlstorage {
 			System.out.println("enter the collection name");
 		//	String collection_name=sc.next();
    String collection_name=br.readLine();
-			System.out.println("enter the json string in the format of {\"name\":\"value\",\"name2\":\"value2\"} ");
+			System.out.println("enter the json string in the format of {\"name\":\"value\",\"name2\":\"value2\"}");
    String json_str=br.readLine();
 	//		String json_str=sc.next();
 			addjsondocument(databasename,collection_name,json_str);
